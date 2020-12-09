@@ -5,7 +5,7 @@ $obj =new Config();
 $data = $obj->Connect();
 $obj=new User();
 $action=$_REQUEST['action'];
-switch(action){
+switch($action){
 case 'sign':
         $name=$_REQUEST['name'];
         $mob=$_REQUEST['mob'];
@@ -14,7 +14,7 @@ case 'sign':
         $ques=$_REQUEST['ques'];
         $ans=$_REQUEST['ans'];
         $out=$obj->sign($name, $mob, $mail, $pass, $ques, $ans, $data);
-     print_r($out);
+     echo $out;
     break;
 
 }

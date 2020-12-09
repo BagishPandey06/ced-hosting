@@ -19,7 +19,15 @@ input[type="button"]{
 	-o-transition:0.5s all;
 	-ms-transition:0.5s all;
 }
-
+#logo{
+   
+        
+        background: linear-gradient( #585CA7,#e7663f);
+        -webkit-text-fill-color: transparent; 
+            -webkit-background-clip: text; 
+            font-weight: bolder;
+      
+}
 h1,h2,h3,h4,h5,h6{
 	padding:0 0;
 	margin:0 0;
@@ -1641,7 +1649,7 @@ a.button4:hover {
 .register-but{
 	margin-top:1em;
 }
-.register-but form input[type="submit"] {
+.register-but form input[type="button"] {
 	background: #e7663f;
 	color: #FFF;
 	font-size: 1.2em;
@@ -1655,7 +1663,7 @@ a.button4:hover {
 	border: none;
 	outline: none;
 }
-.register-but input[type="submit"]:hover {
+.register-but input[type="button"]:hover {
 	background:#7277d5;
 }
 div.register-bottom-grid {

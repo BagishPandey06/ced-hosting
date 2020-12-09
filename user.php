@@ -17,15 +17,21 @@
      */
     public function sign($name, $mob, $mail, $pass, $ques, $ans, $data) 
     {
-        $sql="SELECT * from `user` where `username` LIKE '$username'";
+        $sql="SELECT * from `tbl_user` where `email` LIKE '$mail'";
         $res=$data->query($sql);
+        $sql1="SELECT * from `tbl_user` where `mobile` LIKE '$mob'";
+        $res1=$data->query($sql1);
         if ($res->num_rows > 0) {
-            return 'same';
            
+            return 'sameemail';
+           
+        } if ($res1->num_rows > 0) {
+            return 'samemob';
         } else {
-                     $sql = "INSERT INTO user 
-                (`email`,`password`,`name`,`mobile`,`dateofsignup`) 
-                VALUES ( '$username', '$pass','$name','$mobile',CURDATE())";
+            $pass=md5($pass);
+                     $sql = "INSERT INTO tbl_user 
+                (`email`,`password`,`name`,`mobile`,`security_question`,`security_answer`) 
+                VALUES ( '$mail', '$pass','$name','$mob','$ques','$ans')";
             if ($data->query($sql) === true) {
                     $out="inserted";
             } else {
@@ -33,29 +39,30 @@
             }
                 return $out;
        
-        }
+        
         
     }
+}
     /**
      * Function Login
     */
-    public function login($username,$pass,$data)
+    public function login($mail, $pass, $data)
     {
-        $sql='SELECT * FROM user WHERE 
-        `password`="'.$pass.'" AND `username`="'.$username.'"';
+        $sql='SELECT * FROM tbl_user WHERE 
+        `password`="'.$pass.'" AND `email`="'.$mail.'"';
          $res=$data->query($sql);
         if ($res->num_rows > 0) {
             while ($row=$res->fetch_assoc()) {
-                 $b=$row["isblock"];
-                $r=$row["isadmin"];
+                
+                $r=$row["is_admin"];
                 if ($r == '1') {
                     $_SESSION['admindata']=array
-                    ('username'=>$row['username'],'id'=>$row['userid']);
-                    $out="admin";
+                    ('name'=>$row['name'],'id'=>$row['id']);
+                    header("Location:../cedhosting/admin/");
                     
                 } else if (($r=='0') && ($b=='1') ) {
                     $_SESSION["userdata"]=array
-            ('username'=>$row['username'],'id'=>$row['userid']);         
+            ('name'=>$row['name'],'id'=>$row['id']);         
                     $out="customer";
                     
                 } else if (($r=='0') && ($b=='0') ) {
