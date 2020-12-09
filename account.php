@@ -179,7 +179,7 @@ function validate(){
 	   },dataType: 'html',
 	   success: function (result) {
 		 if(result=='inserted'){
-			 alert("sigind up sucessfully ");
+			 //alert("sigind up sucessfully ");
 			 window.location.href="login.php";
 		 } else if(result == 'sameemail') {
 			 alert('Email  already exists');

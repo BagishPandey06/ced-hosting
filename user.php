@@ -8,7 +8,7 @@
  * @license  http://www.php.net/license/3_01.txt  PHP License 3.01
  * @link     http://localhost/training/taskmy/register.php?
  */
-
+session_start();
    class User
 {
    
@@ -58,19 +58,20 @@
                 if ($r == '1') {
                     $_SESSION['admindata']=array
                     ('name'=>$row['name'],'id'=>$row['id']);
+                   //print_r($_SESSION['admindata']);
                     header("Location:../cedhosting/admin/");
                     
                 } else if (($r=='0') && ($b=='1') ) {
                     $_SESSION["userdata"]=array
             ('name'=>$row['name'],'id'=>$row['id']);         
-                    $out="customer";
+                    // $out="customer";
                     
                 } else if (($r=='0') && ($b=='0') ) {
-                     $out="wait";
+                    //  $out="wait";
                 } else {
-                    $out="credentials";
+                    // $out="credentials";
                 }
-                return $out;
+               // return $out;
             }
         } else {
             $error=array('input'=>'form','msg'=>"login details are wrong");  
