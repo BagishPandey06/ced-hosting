@@ -1,4 +1,12 @@
+<?php
+require 'Config.php';
+require 'admin/product.php';
+$obj =new Config();
+$data = $obj->Connect();
+$obj=new Product();
+$out1=$obj->getpro($data);
 
+?>
 	<!---header--->
 	<div class="header">
 		<div class="container">
@@ -27,10 +35,13 @@
 							<li class="dropdown <?php if($menu=="host"){echo "active";}?>">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hosting<i class="caret"></i></a>
 								<ul class="dropdown-menu">
-									<li><a href="linuxhosting.php">Linux hosting</a></li>
-									<li><a href="wordpresshosting.php">WordPress Hosting</a></li>
-									<li><a href="windowshosting.php">Windows Hosting</a></li>
-									<li><a href="cmshosting.php">CMS Hosting</a></li>
+									<?php foreach($out1 as $key=>$v): ?>
+									<?php if (!($v['prod_name']=='Hosting')) :?>
+										<li><a href="#"><?php echo $v['prod_name']?></a></li>
+									<?php endif; ?>
+									
+									
+<?php endforeach;?>
 								</ul>			
 							</li>
 							<li  class="<?php if($menu=="pricing"){echo "active";}?>"><a href="pricing.php">pricing</a></li>

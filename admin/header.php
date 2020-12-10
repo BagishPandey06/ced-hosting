@@ -166,10 +166,12 @@ session_start();
                 <span class="nav-link-text">Create New User</span>
               </a>
             </li>
+            </ul>
             <hr class="my-3">
             <h6 class="navbar-heading p-0 text-muted">
             <span class="docs-normal">Blog </span>
           </h6>
+          <ul class="navbar-nav">
           <li class="nav-item">
               <a class="nav-link" href="examples/upgrade.html">
                 <i class="ni ni-send text-dark"></i>

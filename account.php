@@ -45,14 +45,16 @@ require 'header.php';?>
 			<div class="register">
 		  	  <form action="account.php" method="post"  > 
 				 <div class="register-top-grid">
-					<h3>personal information</h3>
+					<h3>personal information<small style="font-size:15px;color:#e7663f ;float:right">*Feilds are mandatory to be filled</small></h3>
+					
 					 <div>
+					 
 						<span>Name<label>*</label></span>
 						<input type="text" id="name" required> 
 					 </div>
 					 <div>
 						<span>Mobile<label>*</label></span>
-						<input type="text" id="mob"  required> 
+						<input type="text" id="mob" placeholder="10-11 digits Mobile no. only" required> 
 					 </div>
 					 <div>
 						 <span>Email Address<label>*</label></span>
@@ -85,7 +87,9 @@ require 'header.php';?>
 							
 								<span>Password<label>*</label></span>
 								<input type="password" id="pass">
-								<small style="font-size:10px;color:#585CA7;font-weight:bold;letter-spacing:.1rem"><ul><li>Password must contain 8-16 variable</li>
+								<small style="font-size:10px;color:#585CA7;font-weight:bold;letter-spacing:.1rem"><ul>
+								<li>Password shouldn't contain space</li>
+								<li>Password must contain 8-16 variable</li>
 							 <li>Combination of UPPERCASE, lowercase, special character and numeric value.</li></ul></small>
 							 </div>
 							 <div>
@@ -119,8 +123,13 @@ function validate(){
        var pass=($("#pass").val()).trim();
        var repass=($("#repass").val()).trim();
        var chkname=/^([a-zA-Z]+\s?)*$/;
-       var chkpass=/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*?[#?!@$%^&*-])\S{8,16}$/;
-       var chkmob=/^(0)?[4-9]{1}[0-9]{9}$/;
+	   var chkpass=/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*?[#?!@$%^&*-/s])\S{8,16}$/;
+	   if(mob.length==10){
+		var chkmob=/^[1-9]{1}[0-9]{9}$/;
+	   } else if( mob.length==11) {
+		var chkmob=/^(0)?[1-9]{1}[0-9]{9}$/;
+	   }
+       
 	   var chkmail=/^[a-zA-Z0-9._-]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,4}$/;
 	   var chkans=/^([a-zA-Z0-9]?)*$/;
        if(name==""||mob==""||mail==""||ques==""||ans==""||pass==""||repass==""){
@@ -149,10 +158,8 @@ function validate(){
 		   $("#pass").val('');
 		   $("#repass").val('');
 		   return false;
-
 	   }
 	   insert();
-
 	}
 	
 	function insert(){

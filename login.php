@@ -6,6 +6,10 @@ License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 <?php
+
+if (!empty($_SESSION['admindata']) ) {
+	header("Location:../cedhosting/admin/");
+}
 require 'Config.php';
 require 'user.php';
 $obj =new Config();

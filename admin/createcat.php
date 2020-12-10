@@ -1,4 +1,21 @@
 <?php require 'header.php';?>
+<?php 
+   require '../Config.php';
+   require 'product.php';
+   $obj =new Config();
+$data = $obj->Connect();
+$obj=new Product();
+$out1=$obj->getpro($data);
+if (isset($_POST['submit'])) {
+    $newcat=$_POST['newcat'];
+    $avi=$_POST['avi'];
+    $link=isset($_POST['link'])?$_POST['link']:'';
+    
+    $out=$obj->addcat($newcat, $avi, $link, $data);
+    echo ("<script>alert('Category Added Succesfully');</script>");
+}
+
+?>
     <!-- Header -->
     <div class="header bg-primary pb-6">
       <div class="container-fluid">
@@ -26,45 +43,73 @@
      <!-- Page content -->
      <div class="container mt--6">
       <div class="row justify-content-center">
-        <div class="col-lg-10 col-md-7">
-          <div class="card bg-secondary border-0 mb-0">
-            <div class="card-header bg-transparent pb-5">
-              <div class="text-muted text-center "><h6 style="font-size:35px">Add-Category</h6></div>
+        <div class="col-lg-5 col-md-7">
+          <div class="card bg-secondary border-0 mb-5">
+            <div class="card-header bg-transparent ">
+              <div class=" text-center ">
+              <h6 style="font-size:35px">Add-Category</h6></div>
             </div>
             <div class="card-body px-lg-5 py-lg-5">
-              <form role="form">
+              <form role="form" action="createcat.php" method="post">
+              <div class="form-group mb-3">
+                  <div class="input-group input-group-merge input-group-alternative">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                      <i class="fa fa-lock"></i></span>
+                    </div>
+                    <?php foreach($out1 as $key=>$v) :?>
+                    <?php if($v['prod_name']=='Hosting') :?>
+                    <input class="form-control"   type="text" value =<?php echo $v['prod_name'];?> readonly>
+                    <?php endif;?>
+                    <?php endforeach;?>
+                  </div>
+                </div>
+               
                 <div class="form-group mb-3">
                   <div class="input-group input-group-merge input-group-alternative">
                     <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="fa fa-list"></i></span>
+                      <span class="input-group-text">
+                      <i class="fa fa-list"></i></span>
                     </div>
-                    <input class="form-control" placeholder="New Category" type="text">
+                    <input class="form-control" placeholder="New Category" name="newcat" type="text">
                   </div>
                 </div>
+
+                <div class="form-group mb-3">
+                  <div class="input-group input-group-merge input-group-alternative">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                      <i class="fa fa-list"></i></span>
+                    </div>
+                    <select name="avi" id="" class="form-control" style="font-weight:bolder">
+                    <option value="1">Avilable</option>
+                    <option value="0">Not-Avilable</option>
+                    </select>
+                  </div>
+                </div>
+
+
                 <div class="form-group">
                   <div class="input-group input-group-merge input-group-alternative">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fa fa-link"></i></span>
                     </div>
-                    <input class="form-control" placeholder="link(optional)" type="text">
+                    <input class="form-control" placeholder="link(optional)" name="link" type="text">
                   </div>
                 </div>
                 <div class="text-center">
-                  <button type="button" class="btn btn-primary my-4">Add-Category</button>
+                  <input type="submit" name="submit" class="btn btn-primary my-4" value="Add-Category">
                 </div>
               </form>
             </div>
           </div>
-          <div class="row mt-3">
-            <div class="col-6">
-              <a href="#" class="text-light"><small>Forgot password?</small></a>
-            </div>
-            <div class="col-6 text-right">
-              <a href="#" class="text-light"><small>Create new account</small></a>
-            </div>
-          </div>
+        
         </div>
       </div>
+    </div>
+    <div class="row justify-content-center">
+    <div class="col-lg-10 col-md-7">
+    asdfsd
     </div>
   </div>
       <?php require 'footer.php';?>
