@@ -5,22 +5,7 @@ Author URL: http://w3layouts.com
 License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
-<?php
 
-if (!empty($_SESSION['admindata']) ) {
-	header("Location:../cedhosting/admin/");
-}
-require 'Config.php';
-require 'user.php';
-$obj =new Config();
-$data = $obj->Connect();
-$obj=new User();
-if (isset($_POST['submit'])) {
-	$mail=$_POST['mail'];
-	$pass=md5($_POST['pass']);
-	$obj->login($mail, $pass, $data);
-}
-?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -52,7 +37,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <body>
 <?php
 if($menu="login");
-require 'header.php';?>
+require 'header.php';
+
+if (!empty($_SESSION['admindata']) ) {
+	header("Location:../cedhosting/admin/");
+}
+
+require 'user.php';
+
+$obj=new User();
+
+if (isset($_POST['submit'])) {
+	$mail=$_POST['mail'];
+	$pass=md5($_POST['pass']);
+	$obj->login($mail, $pass, $data);
+}
+?>
 		<!---login--->
 			<div class="content">
 				<div class="main-1">

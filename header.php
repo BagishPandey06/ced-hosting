@@ -38,10 +38,8 @@ $out1=$obj->getpro($data);
 									<?php foreach($out1 as $key=>$v): ?>
 									<?php if (!($v['prod_name']=='Hosting')) :?>
 										<li><a href="#"><?php echo $v['prod_name']?></a></li>
-									<?php endif; ?>
-									
-									
-<?php endforeach;?>
+									<?php endif; ?>					
+                                    <?php endforeach;?>
 								</ul>			
 							</li>
 							<li  class="<?php if($menu=="pricing"){echo "active";}?>"><a href="pricing.php">pricing</a></li>

@@ -109,7 +109,35 @@ if (isset($_POST['submit'])) {
     </div>
     <div class="row justify-content-center">
     <div class="col-lg-10 col-md-7">
-    asdfsd
+    <table id="cattable">
+      <thead class="bg-info">
+        <tr>
+          
+          <th>Category Name</th>
+          <th>Link</th>
+          <th>Avilabilty</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody class="bg-secondary">
+        <?php foreach($out1 as $key=>$v) :?>
+        <tr>
+          
+          <td><?php echo $v['prod_name'];?></td>
+        <td><?php echo $v['link']?></td>
+        <td><?php echo $v['prod_available']?></td>
+        <td><button class="btn btn-outline-success delr" data-id=<?php $v['id']?>>Edit</button>
+        <button class="btn btn-outline-danger delr" data-id=<?php $v['id']?>>Delete</button></td>
+      </tr>
+        <?php endforeach;?>
+      </tbody>
+    </table>
+    
     </div>
   </div>
-      <?php require 'footer.php';?>
+  <script>
+    $(document).ready(function () {
+    $("#cattable").dataTable();
+  });
+  </script>
+    <?php require 'footer.php';?>
