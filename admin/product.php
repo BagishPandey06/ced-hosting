@@ -41,6 +41,28 @@
         }
         
     }
+    public function getcatid($id, $data) 
+    {
+        $sql="SELECT * FROM tbl_product WHERE `id`='$id'";
+        $res=$data->query($sql);
+        if ($res->num_rows > 0) {
+            while ($row=$res->fetch_assoc()) {
+                $this->rows[]=$row;
+            }
+            return $this->rows;
+        }
+    }
+    public function upcat($id, $catname, $avi, $link, $data) 
+    {
+        $sql="SELECT * FROM tbl_product WHERE `id`='$id'";
+        $res=$data->query($sql);
+        if ($res->num_rows > 0) {
+            while ($row=$res->fetch_assoc()) {
+                $this->rows[]=$row;
+            }
+            return $this->rows;
+        }
+    }
 }
    
 

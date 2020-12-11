@@ -14,7 +14,9 @@ if (isset($_POST['submit'])) {
     $out=$obj->addcat($newcat, $avi, $link, $data);
     echo ("<script>alert('Category Added Succesfully');</script>");
 }
-
+if (isset($_POST['edit'])) {
+  echo "ok";
+}
 ?>
     <!-- Header -->
     <div class="header bg-primary pb-6">
@@ -126,7 +128,7 @@ if (isset($_POST['submit'])) {
           <td><?php echo $v['prod_name'];?></td>
         <td><?php echo $v['link']?></td>
         <td><?php echo $v['prod_available']?></td>
-        <td><button class="btn btn-outline-success delr" data-id=<?php $v['id']?>>Edit</button>
+        <td><button  class="btn btn-outline-success edit" data-toggle="modal" data-target="#exampleModal" data-id="<?php echo $v['id']?>">Edit</button>
         <button class="btn btn-outline-danger delr" data-id=<?php $v['id']?>>Delete</button></td>
       </tr>
         <?php endforeach;?>
@@ -135,9 +137,22 @@ if (isset($_POST['submit'])) {
     
     </div>
   </div>
-  <script>
-    $(document).ready(function () {
-    $("#cattable").dataTable();
-  });
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header modal-center">
+        <h5 class="modal-title " id="exampleModalLabel">Edit Category</h5>  
+        
+      </div>
+      <div class="modal-body">
+       
+               
+              
+      
+      </div>
+    </div>
+  </div>
+</div>
+  <script src="admin.js">
   </script>
     <?php require 'footer.php';?>
