@@ -26,6 +26,17 @@
             return $this->rows;
         }
     }
+    public function getproavi($data) 
+    {
+        $sql="SELECT * FROM tbl_product where `prod_available`=1";
+        $res=$data->query($sql);
+        if ($res->num_rows > 0) {
+            while ($row=$res->fetch_assoc()) {
+                $this->rows[]=$row;
+            }
+            return $this->rows;
+        }
+    }
     /**
      * Function Login
     */
@@ -54,13 +65,37 @@
     }
     public function upcat($id, $catname, $avi, $link, $data) 
     {
-        $sql="SELECT * FROM tbl_product WHERE `id`='$id'";
-        $res=$data->query($sql);
-        if ($res->num_rows > 0) {
-            while ($row=$res->fetch_assoc()) {
-                $this->rows[]=$row;
-            }
-            return $this->rows;
+        $sql="UPDATE tbl_product SET `prod_name`='$catname',`link`='$link',`prod_available`='$avi' WHERE `id`='$id'";
+        if ($res=$data->query($sql)==true) {
+            $out="inserted";
+        } else {
+            $out="khtm"; 
+        }
+        return $out;
+    }
+    public function delcat($id, $data) 
+    {
+        $sql="DELETE FROM tbl_product WHERE `id`='$id'";
+        if ($res=$data->query($sql)==true) {
+            $out="inserted";
+        } else {
+            $out="khtm"; 
+        }
+        return $out;
+    }
+    public function insertprod($prntcat, $prdname, $url, $prodj, $mnthprc, $anprc, $sku, $data) 
+    {
+        $sql="INSERT into tbl_product (`prod_parent_id`,`prod_name`,`link`) VALUES('$prntcat','$prdname','$url')";
+
+        if ($data->query($sql)=== true) {
+            $lstid=$data->insert_id;
+            $sql="INSERT into tbl_product_description (`prod_id`,`description`,`mon_price`,`annual_price`,`sku`) 
+            VALUES('$lstid','$prodj','$mnthprc','$anprc','$sku')";
+                if ($data->query($sql)=== true) {
+                    return "inserted";
+                }
+        } else {
+            return $data->error;
         }
     }
 }

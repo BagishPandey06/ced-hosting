@@ -5,6 +5,8 @@ $obj =new Config();
 $data = $obj->Connect();
 $obj=new Product();
 $out1=$obj->getpro($data);
+
+
 ?>
     <div class="header bg-primary pb-6">
       <div class="container-fluid">
@@ -49,10 +51,10 @@ $out1=$obj->getpro($data);
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-username"><span>Select Product Category <label style="color:red">*</label></span></label>
-                        <select class="form-control"name="" id="">
+                        <select class="form-control"name="" id="prntcat">
                                     <?php foreach($out1 as $key=>$v): ?>
                               <?php if (!($v['prod_name']=='Hosting')) :?>
-                                <option value=""><?php echo $v['prod_name']?></a></option>
+                                <option value="<?php echo $v['id']?>"><?php echo $v['prod_name']?></a></option>
                               <?php endif; ?>					
                                   <?php endforeach;?>
                                     </select>
@@ -62,7 +64,7 @@ $out1=$obj->getpro($data);
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-email"><span>Enter Product Name <label style="color:red">*</label></span></label>
-                        <input type="email" id="input-email" class="form-control" placeholder="jesse@example.com">
+                        <input type="text" id="prdname" class="form-control" placeholder="jesse@example.com">
                       </div>
                     </div>
                   </div>
@@ -70,7 +72,7 @@ $out1=$obj->getpro($data);
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-first-name"><span>Page URL</span></label>
-                        <input type="text" id="input-first-name" class="form-control" placeholder="First name" value="Lucky">
+                        <input type="text" id="url" class="form-control" placeholder="URL" >
                       </div>
                     </div>
                     
@@ -84,14 +86,14 @@ $out1=$obj->getpro($data);
                   <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-username"><span>Enter Monthly Price <label style="color:red">*</label></span></label>
-                        <input type="text" id="input-username" class="form-control" placeholder="Username" value="lucky.jesse">
+                        <input type="text" id="mnthprc" class="form-control" placeholder="Enter Monthly Price" >
                            <h5 class="text-muted">This would be Monthly Plan </h5>
                     </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-email"><span>Enter Annual Price<label style="color:red">*</label></span></label>
-                        <input type="email" id="input-email" class="form-control" placeholder="jesse@example.com">
+                        <input type="email" id="anprc" class="form-control" placeholder="Enter Annual Price">
                         <h5 class="text-muted">This would be Annual Price  </h5>
                     </div>
                     </div>
@@ -100,7 +102,7 @@ $out1=$obj->getpro($data);
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-first-name"><span>SKU<label style="color:red">*</label></span></label>
-                        <input type="text" id="input-first-name" class="form-control" placeholder="First name" value="Lucky">
+                        <input type="text" id="sku" class="form-control" placeholder="SKU" >
 
                     </div>
                     </div>
@@ -114,7 +116,7 @@ $out1=$obj->getpro($data);
                   <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-username"><span>Web Space(in GB)<label style="color:red">*</label></span></label>
-                        <input type="text" id="input-username" class="form-control" placeholder="Username" value="lucky.jesse">
+                        <input type="text" id="ws" class="form-control" placeholder="Web Space" >
                         <h5 class="text-muted">Enter 0.5 for 512 MB  </h5>
 
                     </div>
@@ -122,7 +124,7 @@ $out1=$obj->getpro($data);
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-email"><span>Bandwidth (in GB) <label style="color:red">*</label></span></label>
-                        <input type="email" id="input-email" class="form-control" placeholder="jesse@example.com">
+                        <input type="email" id="band" class="form-control" placeholder="Bandwidth">
                         <h5 class="text-muted">Enter 0.5 for 512 MB  </h5>
 
                       </div>
@@ -132,7 +134,7 @@ $out1=$obj->getpro($data);
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-first-name"><span>Free Domain <label style="color:red">*</label></span></label>
-                        <input type="text" id="input-first-name" class="form-control" placeholder="First name" value="Lucky">
+                        <input type="text" id="domain" class="form-control" placeholder="Free Domain">
                         <h5 class="text-muted">Enter 0 if no domain available in this service</h5>
 
                       </div>
@@ -140,7 +142,7 @@ $out1=$obj->getpro($data);
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-first-name"><span>Language / Technology Support<label style="color:red">*</label></span></label>
-                        <input type="text" id="input-first-name" class="form-control" placeholder="First name" value="Lucky">
+                        <input type="text" id="sup" class="form-control" placeholder="Language / Technology Support" >
                         <h5 class="text-muted"> Separate by (,) Ex: PHP, MySQL, MongoDB </h5>
 
                       </div>
@@ -150,7 +152,7 @@ $out1=$obj->getpro($data);
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-first-name"><span>Mailbox <label style="color:red">*</label></span></label>
-                        <input type="text" id="input-first-name" class="form-control" placeholder="First name" value="Lucky">
+                        <input type="text" id="mail" class="form-control" placeholder="Mailbox">
                         <h5 class="text-muted">Enter Number of mailbox will be provided, enter 0 if none </h5>
 
                       </div>
@@ -159,7 +161,7 @@ $out1=$obj->getpro($data);
                 </div>
                 <hr class="my-4" />
                 <div class="text-center">
-                <input type="submit" value="Add product" class="btn btn-primary">
+                <input type="button" value="Add product" class="btn btn-primary prod">
                 </div>
               </form>
             </div>
@@ -168,4 +170,5 @@ $out1=$obj->getpro($data);
         </div>
       </div>
       </div>
+      <script src="admin.js"></script>
       <?php require 'footer.php';?>

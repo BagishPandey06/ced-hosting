@@ -1,4 +1,5 @@
-<?php require 'header.php';?>
+<?php 
+require 'header.php';?>
 <?php 
    require '../Config.php';
    require 'product.php';
@@ -12,7 +13,8 @@ if (isset($_POST['submit'])) {
     $link=isset($_POST['link'])?$_POST['link']:'';
     
     $out=$obj->addcat($newcat, $avi, $link, $data);
-    echo ("<script>alert('Category Added Succesfully');</script>");
+    echo ("<script>alert('Category Added Succesfully');
+    window.location.href='createcat.php';</script>");
 }
 if (isset($_POST['edit'])) {
   echo "ok";
@@ -123,14 +125,16 @@ if (isset($_POST['edit'])) {
       </thead>
       <tbody class="bg-secondary">
         <?php foreach($out1 as $key=>$v) :?>
+          <?php if(!($v['prod_name']=='Hosting')) :?>
         <tr>
-          
+        
           <td><?php echo $v['prod_name'];?></td>
         <td><?php echo $v['link']?></td>
-        <td><?php echo $v['prod_available']?></td>
+        <td><?php if($v['prod_available']==0){echo ("Not-Available");}else if($v['prod_available']==1){echo ("Available");}?></td>
         <td><button  class="btn btn-outline-success edit" data-toggle="modal" data-target="#exampleModal" data-id="<?php echo $v['id']?>">Edit</button>
-        <button class="btn btn-outline-danger delr" data-id=<?php $v['id']?>>Delete</button></td>
+        <button class="btn btn-outline-danger del" data-id="<?php echo $v['id']?>">Delete</button></td>
       </tr>
+        <?php endif;?>
         <?php endforeach;?>
       </tbody>
     </table>
@@ -142,8 +146,7 @@ if (isset($_POST['edit'])) {
     <div class="modal-content">
       <div class="modal-header modal-center">
         <h5 class="modal-title " id="exampleModalLabel">Edit Category</h5>  
-        
-      </div>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>    </div>
       <div class="modal-body">
        
                

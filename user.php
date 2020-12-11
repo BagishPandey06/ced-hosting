@@ -8,7 +8,9 @@
  * @license  http://www.php.net/license/3_01.txt  PHP License 3.01
  * @link     http://localhost/training/taskmy/register.php?
  */
-session_start();
+if(!isset($_SESSION)){
+    session_start();
+}
    class User
 {
    
@@ -59,7 +61,8 @@ session_start();
                     $_SESSION['admindata']=array
                     ('name'=>$row['name'],'id'=>$row['id']);
                    //print_r($_SESSION['admindata']);
-                    header("Location:../cedhosting/admin/");
+                   echo '<script>window.location.href="../cedhosting/admin/"</script>';
+                    //header("Location:../cedhosting/admin/");
                     
                 } else if (($r=='0') && ($b=='1') ) {
                     $_SESSION["userdata"]=array

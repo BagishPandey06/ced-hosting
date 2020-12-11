@@ -5,7 +5,12 @@ Author URL: http://w3layouts.com
 License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 -->
-
+<?php
+if (!empty($_SESSION['admindata']) ) {
+	echo '<script>window.location.href="../cedhosting/admin/"</script>';
+	//header("Location:../cedhosting/admin/");
+}
+?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -15,8 +20,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<meta name="keywords" content="Planet Hosting Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
-Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<meta name="keywords" content="Planet Hosting Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <script src="js/jquery-1.11.1.min.js"></script>
 <script src="js/bootstrap.js"></script>
@@ -36,17 +40,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </head>
 <body>
 <?php
-if($menu="login");
+require 'user.php';
 require 'header.php';
 
-if (!empty($_SESSION['admindata']) ) {
-	header("Location:../cedhosting/admin/");
-}
-
-require 'user.php';
-
+if($menu="login");
 $obj=new User();
-
 if (isset($_POST['submit'])) {
 	$mail=$_POST['mail'];
 	$pass=md5($_POST['pass']);

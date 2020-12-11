@@ -14,7 +14,9 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 -->
 <?php
-session_start();
+if(!isset($_SESSION)){
+  session_start();
+}
 
 ?>
 <!DOCTYPE html>
@@ -42,6 +44,9 @@ session_start();
   <script src="assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="assets/js/argon.js?v=1.2.0"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
   
@@ -104,7 +109,7 @@ session_start();
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="examples/profile.html">
+              <a class="nav-link" href="viewprod.php">
                 <i class="ni ni-single-02 text-yellow"></i>
                 <span class="nav-link-text">View Products</span>
               </a>

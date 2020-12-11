@@ -4,7 +4,7 @@ require 'admin/product.php';
 $obj =new Config();
 $data = $obj->Connect();
 $obj=new Product();
-$out1=$obj->getpro($data);
+$out1=$obj->getproavi($data);
 
 ?>
 	<!---header--->
@@ -37,7 +37,7 @@ $out1=$obj->getpro($data);
 								<ul class="dropdown-menu">
 									<?php foreach($out1 as $key=>$v): ?>
 									<?php if (!($v['prod_name']=='Hosting')) :?>
-										<li><a href="#"><?php echo $v['prod_name']?></a></li>
+										<li><a href="<?php echo $v['link']?>"><?php echo $v['prod_name']?></a></li>
 									<?php endif; ?>					
                                     <?php endforeach;?>
 								</ul>			
