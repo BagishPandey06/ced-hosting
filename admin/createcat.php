@@ -1,12 +1,12 @@
 <?php 
-require 'header.php';?>
-<?php 
+require 'header.php';
    require '../Config.php';
    require 'product.php';
    $obj =new Config();
 $data = $obj->Connect();
 $obj=new Product();
 $out1=$obj->getpro($data);
+//print_r($out1);
 if (isset($_POST['submit'])) {
     $newcat=$_POST['newcat'];
     $avi=$_POST['avi'];
@@ -16,9 +16,7 @@ if (isset($_POST['submit'])) {
     echo ("<script>alert('Category Added Succesfully');
     window.location.href='createcat.php';</script>");
 }
-if (isset($_POST['edit'])) {
-  echo "ok";
-}
+
 ?>
     <!-- Header -->
     <div class="header bg-primary pb-6">
@@ -61,11 +59,11 @@ if (isset($_POST['edit'])) {
                       <span class="input-group-text">
                       <i class="fa fa-lock"></i></span>
                     </div>
-                    <?php foreach($out1 as $key=>$v) :?>
-                    <?php if($v['prod_name']=='Hosting') :?>
-                    <input class="form-control"   type="text" value =<?php echo $v['prod_name'];?> readonly>
-                    <?php endif;?>
-                    <?php endforeach;?>
+                    <?php //foreach($out1 as $key=>$v) :?>
+                    <?php //if($v['prod_name']=='Hosting') :?>
+                    <input class="form-control"   type="text" value ="Hosting" readonly>
+                    <?php //endif;?>
+                    <?php //endforeach;?>
                   </div>
                 </div>
                
@@ -116,26 +114,32 @@ if (isset($_POST['edit'])) {
     <table id="cattable">
       <thead class="bg-info">
         <tr>
-          
+        <th>Category Parent Name</th>
           <th>Category Name</th>
-          <th>Link</th>
-          <th>Avilabilty</th>
-          <th>Action</th>
+          <th>Category Link</th>
+          <th>Category Availabilty</th>
+          <th>Category Action</th>
         </tr>
       </thead>
       <tbody class="bg-secondary">
+      <?php if(!empty($out1)) :?>
         <?php foreach($out1 as $key=>$v) :?>
           <?php if(!($v['prod_name']=='Hosting')) :?>
         <tr>
-        
+        <td><?php echo $v['prod_parent_name'];?></td>
           <td><?php echo $v['prod_name'];?></td>
         <td><?php echo $v['link']?></td>
-        <td><?php if($v['prod_available']==0){echo ("Not-Available");}else if($v['prod_available']==1){echo ("Available");}?></td>
-        <td><button  class="btn btn-outline-success edit" data-toggle="modal" data-target="#exampleModal" data-id="<?php echo $v['id']?>">Edit</button>
+        <td><?php if ($v['prod_available']==0) {
+          echo ("Not-Available"); 
+          } else if ($v['prod_available']==1) {
+            echo ("Available");
+            }?></td>
+        <td><button  class="btn btn-outline-success edit" data-toggle="modal" data-target="#exampleModal" data-id="<?php echo $v['id'];?>">Edit</button>
         <button class="btn btn-outline-danger del" data-id="<?php echo $v['id']?>">Delete</button></td>
       </tr>
         <?php endif;?>
         <?php endforeach;?>
+        <?php endif;?>
       </tbody>
     </table>
     
