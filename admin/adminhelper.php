@@ -16,7 +16,13 @@ case 'edit':
 case 'editpro':
         $id=$_REQUEST['id'];
         $out=$obj->getproid($id, $data);
-        print_r(json_encode($out));
+        $out = $out[0];
+        $out['description'] = json_decode($out['description']);
+       // $out = $out[0];
+        $out1=$obj->getproavi($data);
+        $arr = array('Product'=>$out, 'category'=>$out1);
+        print_r(json_encode($arr));
+        //print_r($out1);
     break;
 case 'upcat':
     $id=$_REQUEST['id'];
@@ -79,7 +85,7 @@ case 'upprod':
     'sup'=>$sup,
     'mail'=>$mail
     );
-    //print_r($prod);
+    //print_r($id);
     $prodj=json_encode($prod);
     $out=$obj->upprod($id, $prntcat, $prdname, $url, $prodj, $mnthprc, $anprc, $sku, $data);
     print_r($out);

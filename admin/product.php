@@ -13,7 +13,9 @@
 {
     public $rows=array();
     /**
-     * Function Sign
+     * Registers the tokens that this sniff wants to listen for.
+     *
+     * @return data
      */
     public function getpro($data) 
     {
@@ -46,7 +48,7 @@
     }
     public function getproavi($data) 
     {
-        $sql="SELECT * FROM tbl_product where `prod_available`=1";
+        $sql="SELECT * FROM tbl_product where `prod_available`='1' and `prod_parent_id`=1";
         $res=$data->query($sql);
 
         if ($res->num_rows > 0) {
@@ -178,26 +180,8 @@
         $res=$data->query($sql);
         if ($res->num_rows > 0) {
             while ($row=$res->fetch_assoc()) {
-                //$prod_data[]=$row;
-                $desc=json_decode($row['description']);
-                $ws=$desc->{'ws'};
-                $band=$desc->{'band'};
-                $domain=$desc->{'domain'};
-                $sup=$desc->{'sup'};
-                $mail=$desc->{'mail'};
-                $prod_data[]=array(
-                    'id'=>$row['prod_id'],
-                   'ws'=>$ws,
-                   'band'=>$band,
-                   'domain'=>$domain,
-                   'sup'=> $sup,
-                   'mail'=> $mail,
-                   'link'=>$row['html'],
-                   'prod_parent_id'=>$row['prod_parent_id'],
-                   'prod_name'=>$row['prod_name'],
-                   'mon_price'=>$row['mon_price'],
-                   'annual_price'=>$row['annual_price'],
-                   'sku'=>$row['sku']);
+                $prod_data[] = $row;
+               
             }
             return $prod_data;
         }
@@ -205,16 +189,17 @@
     }
     public function upprod($id, $prntcat, $prdname, $url, $prodj, $mnthprc, $anprc, $sku, $data)
     {
-        $sql= "UPDATE `tbl_product` SET `prod_name`='$prdname',`html`='$url' WHERE `id` ='$id'";
+        $sql= "UPDATE `tbl_product` SET `prod_parent_id`='$prntcat',`prod_name`='$prdname',`html`='$url' WHERE `id` ='$id'";
         if ($data->query($sql) === true) {
-            $sql2="UPDATE `tbl_product_description` SET `description`='$prodj',`mon_price`='$mnthprc',`annual_price`='$anprc',`sku`='$sku' WHERE `prod_id` ='$id'";
+            $sql2="UPDATE `tbl_product_description` SET `description`='$prodj',`mon_price`='$mnthprc',
+            `annual_price`='$anprc',`sku`='$sku' WHERE `prod_id` ='$id'";
             if ($data->query($sql2) === true) {
                 return 1;
             } else {
-                return "Error updating record: " . $this->conn->error;
+                return "Error updating record: " . $data->error;
             }
         } else {
-            return "Error updating record: " . $this->conn->error;
+            return "Error updating record: " . $data->error;
         }
     }
 }

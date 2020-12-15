@@ -17,7 +17,7 @@ case 'sign':
         $ans=$_REQUEST['ans'];
         $out=$obj->sign($name, $mob, $mail, $pass, $ques, $ans, $data);
         require 'phpmailer.php';
-     //echo $out;
+    echo $out;
     break;
 
 }

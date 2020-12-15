@@ -1,4 +1,13 @@
 <?php 
+/**
+ * * PHP version 7.2.10
+ * 
+ * @category Components
+ * @package  PackageName
+ * @author   Bagish <Bagishpandey999@gmail.com>
+ * @license  http://www.php.net/license/3_01.txt  PHP License 3.01
+ * @link     http://localhost/training/taskmy/register.php?
+ */
 require 'header.php';
 require '../Config.php';
 require 'product.php';
@@ -7,9 +16,6 @@ $data = $obj->Connect();
 $obj=new Product();
 $out1=$obj->getpro($data);
 $out2=$obj->getallprod($data);
-
-
-
 
 ?>
     <div class="header bg-primary pb-6">
@@ -20,9 +26,12 @@ $out2=$obj->getallprod($data);
               <h6 class="h2 text-white d-inline-block mb-0">Google maps</h6>
               <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-                  <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-                  <li class="breadcrumb-item"><a href="#">Maps</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Google maps</li>
+                  <li class="breadcrumb-item">
+                    <a href="#"><i class="fas fa-home"></i></a></li>
+                  <li class="breadcrumb-item">
+                    <a href="#">Maps</a></li>
+                  <li class="breadcrumb-item active" 
+                  aria-current="page">Google maps</li>
                 </ol>
               </nav>
             </div>
@@ -49,10 +58,11 @@ $out2=$obj->getallprod($data);
         </div>
         <div class="card-body">
 
-          <table class="table align-items-center table-bordered table-flush table-responsive" id="prodtable">
+          <table class="table align-items-center 
+          table-bordered table-flush table-responsive" id="prodtable">
             <thead class="bg-info">
               <tr>
-                <th>Product Parent Name</th>
+                <th>Product Category Name</th>
                 <th>Product Name</th>
                 <th>Product URL</th>
                 <th>Product Monthly price</th>
@@ -71,8 +81,8 @@ $out2=$obj->getallprod($data);
               <p>No DATA found</p>
             <?php endif;?>
             <?php if (!empty($out2)) :?>
-              <?php foreach ($out2 as $key=>$v) :?>
-              <?php if (!($v['prod_name']=='Hosting') ) :?>
+                <?php foreach ($out2 as $key=>$v) :?>
+                <?php if (!($v['prod_name']=='Hosting') ) :?>
               <tr>
                 <td><?php echo $v['prnt_prod_name'];?></td>
                 <td><?php echo $v['prod_name'];?></td>
@@ -85,13 +95,16 @@ $out2=$obj->getallprod($data);
                 <td><?php echo $v['domain']?></td>
                 <td><?php echo $v['sup']?></td>
                 <td><?php echo $v['mail']?></td>
-                <td><button name="edit" class="btn btn-outline-success editpro" data-toggle="modal" data-target="#exampleModal"
+                <td><button name="edit" class="btn btn-outline-success editpro"
+                 data-toggle="modal" data-target="#exampleModal"
                     data-id="<?php echo $v['id']?>">Edit</button>
-                  <button class="btn btn-outline-danger delpro" data-id="<?php echo $v['id']; ?>">Delete</button></td>
+                  <button class="btn btn-outline-danger delpro" 
+                  data-id="<?php echo $v['id'];
+                    ?>">Delete</button></td>
               </tr>
-              <?php endif;?>
-              <?php endforeach;?>
                 <?php endif;?>
+                <?php endforeach;?>
+            <?php endif;?>
             </tbody>
           </table>
 
@@ -101,38 +114,21 @@ $out2=$obj->getallprod($data);
   </div>
 </div>
 </div>
-<div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade " id="exampleModal" 
+tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header modal-center ">
         <h5 class="modal-title " id="exampleModalLabel">Edit product</h5>  
-        <button type="button" class="close" data-dismiss="modal">&times;</button>    </div>
+        <button type="button" class="close" 
+        data-dismiss="modal">&times;</button>    </div>
       <div class="modal-body">
 
-      <form>
-          <h6 class="heading-small text-muted mb-4">Enter Product Details</h6>
-          <div class="pl-lg-4">
-            <div class="row">
-              <div class="col-lg-6">
-                <div class="form-group">
-                  <label class="form-control-label" for="input-username"><span>Select Product Category <label style="color:red">*</label></span></label>
-                  <select class="form-control"  id="eprntcat" required>
-                    <?php foreach($out1 as $key=>$v): ?>
-                      <?php if (!($v['prod_name']=='Hosting')) :?>
-                        <option value="<?php echo $v['id']?>"><?php echo $v['prod_name']?></a></option>
-                      <?php endif; ?>
-                    <?php endforeach;?>
-                  </select>
-                </div>
-              </div>
-   
-                                    <div id="modal-body"></div>
-              
-      
-      </div>
+     
+             
     </div>
   </div>
 </div>
                       
-      <script src="admin.js"></script>
+      <script src="adminedit.js"></script>
         <?php require 'footer.php';?>

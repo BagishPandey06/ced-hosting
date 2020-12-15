@@ -37,8 +37,8 @@ $out1=$obj->getproavi($data);
 								<ul class="dropdown-menu">
 									<?php foreach($out1 as $key=>$v): ?>
 									<?php if (!($v['prod_name']=='Hosting')) :?>
-										<li><a href="<?php echo $v['link']?>"><?php echo $v['prod_name']?></a></li>
-									<?php endif; ?>					
+										<li><a href="catpage.php?id=<?php echo $v['id'];?>"><?php echo $v['prod_name']?></a></li>
+									<?php endif; ?>
                                     <?php endforeach;?>
 								</ul>			
 							</li>

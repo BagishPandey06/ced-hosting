@@ -131,7 +131,7 @@ function validate(){
 	   }
        
 	   var chkmail=/^[a-zA-Z0-9._-]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,4}$/;
-	   var chkans=/^([a-zA-Z0-9]?)*$/;
+	   var chkans=/^[^0-9][a-zA-Z0-9-\s]+$/;
        if(name==""||mob==""||mail==""||ques==""||ans==""||pass==""||repass==""){
            alert("All feild are mandatory to be filled !!");
            return false;
@@ -186,7 +186,7 @@ function validate(){
 	   },dataType: 'html',
 	   success: function (result) {
 		 if(result=='inserted'){
-			 //alert("sigind up sucessfully ");
+			 alert("sigind up sucessfully ");
 			 window.location.href="login.php";
 		 } else if(result == 'sameemail') {
 			 alert('Email  already exists');
