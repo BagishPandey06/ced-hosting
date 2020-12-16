@@ -8,15 +8,33 @@
  * @license  http://www.php.net/license/3_01.txt  PHP License 3.01
  * @link     http://localhost/training/taskmy/register.php?
  */
-if(!isset($_SESSION)){
+if (!isset($_SESSION)) {
     session_start();
 }
-   class User
+/**
+ * * PHP version 7.2.10
+ * 
+ * @category Components
+ * @package  PackageName
+ * @author   Bagish <Bagishpandey999@gmail.com>
+ * @license  http://www.php.net/license/3_01.txt  PHP License 3.01
+ * @link     http://localhost/training/taskmy/register.php?
+ */
+class User
 {
-   
     /**
-     * Function Sign
-     */
+     * Function for fetch Product
+     * 
+     * @param name $name comment
+     * @param mob  $mob  comment
+     * @param mail $mail comment
+     * @param pass $pass comment
+     * @param ques $ques comment
+     * @param ans  $ans  comment
+     * @param data $data comment
+     * 
+     * @return fetchProduct()
+     */   
     public function sign($name, $mob, $mail, $pass, $ques, $ans, $data) 
     {
         $sql="SELECT * from `tbl_user` where `email` LIKE '$mail'";
@@ -38,16 +56,18 @@ if(!isset($_SESSION)){
                     $out="inserted";
             } else {
                     $out=$data->error;
-            }
-                return $out;
-       
-        
-        
+            }   
+        }
     }
-}
     /**
-     * Function Login
-    */
+     * Function for fetch Product
+     * 
+     * @param mail $mail comment
+     * @param pass $pass comment
+     * @param data $data comment
+     * 
+     * @return fetchProduct()
+     */ 
     public function login($mail, $pass, $data)
     {
         $sql='SELECT * FROM tbl_user WHERE 
@@ -60,21 +80,13 @@ if(!isset($_SESSION)){
                 if ($r == '1') {
                     $_SESSION['admindata']=array
                     ('name'=>$row['name'],'id'=>$row['id']);
-                   //print_r($_SESSION['admindata']);
-                   echo '<script>window.location.href="../cedhosting/admin/"</script>';
-                    //header("Location:../cedhosting/admin/");
-                    
+                    echo '<script>window.location.href="../cedhosting/admin/"</script>';
                 } else if (($r=='0') && ($b=='1') ) {
                     $_SESSION["userdata"]=array
-            ('name'=>$row['name'],'id'=>$row['id']);         
-                    // $out="customer";
-                    
+                    ('name'=>$row['name'],'id'=>$row['id']);         
                 } else if (($r=='0') && ($b=='0') ) {
-                    //  $out="wait";
                 } else {
-                    // $out="credentials";
                 }
-               // return $out;
             }
         } else {
             $error=array('input'=>'form','msg'=>"login details are wrong");  

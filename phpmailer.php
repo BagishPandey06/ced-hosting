@@ -1,5 +1,13 @@
 <?php
-
+/**
+ * * PHP version 7.2.10
+ * 
+ * @category Components
+ * @package  PackageName
+ * @author   Bagish <Bagishpandey999@gmail.com>
+ * @license  http://www.php.net/license/3_01.txt  PHP License 3.01
+ * @link     http://localhost/training/taskmy/register.php?
+ */
 require "vendor/autoload.php";
 
 $robo = 'bagishpandey999@gmail.com';
@@ -16,16 +24,14 @@ try {
     $mailer->isSMTP();
 
     if ($developmentMode) {
-    $mailer->SMTPOptions = [
+        $mailer->SMTPOptions = [
         'ssl'=> [
         'verify_peer' => false,
         'verify_peer_name' => false,
         'allow_self_signed' => true
         ]
-    ];
+        ];
     }
-
-
     $mailer->Host = 'ssl://smtp.gmail.com';
     $mailer->SMTPAuth = true;
     $mailer->Username = 'bagishpandey999@gmail.com';

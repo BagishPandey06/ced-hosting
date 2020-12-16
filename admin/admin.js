@@ -406,6 +406,10 @@ $(document).ready(function () {
     var url = $("#url").val().trim();
     var mnthprc = $("#mnthprc").val().trim();
     var anprc = $("#anprc").val().trim();
+    if(mnthprc >= anprc){
+      alert("Monthly price can't be Higher or Equal than Annual price");
+      return false;
+    }
     var sku = $("#sku").val().trim();
     var ws = $("#ws").val().trim();
     var band = $("#band").val().trim();
